@@ -49,6 +49,22 @@ namespace calculator
     // Calculator class to perform operations
     public class Calculator
     {
+        public double Gcd(double num1, double num2) {
+            if (num1 < num2) {
+                double temp;
+                temp = num1;
+                num1 = num2;
+                num2 = temp;
+            }
+            while (num2 != 0) {
+                double tmp = num1 % num2;
+                num1 = num2;
+                num2 = tmp;
+            }
+            
+            return num1;
+        }
+        
         // ---------- TODO ----------
         public double Calculate(double num1, string op, double num2) {
             
@@ -71,6 +87,8 @@ namespace calculator
                     }
                     return result;
                 case "%": return num1 % num2;
+                case "G": return Gcd(num1, num2);
+                case "L": return num1 * num2 / Gcd(num1, num2);
                 case "/":
                     if (num2 == 0) {
                         throw new DivideByZeroException("Division by zero is not allowed");
@@ -83,35 +101,3 @@ namespace calculator
     }
 }
 
-/* example output
-
-Enter an expression (ex. 2 + 3):
->> 4 * 3
-Result: 12
-
-*/
-
-
-/* example output (CHALLANGE)
-
-Enter an expression (ex. 2 + 3):
->> 4 ** 3
-Result: 64
-
-Enter an expression (ex. 2 + 3):
->> 5 ** -2
-Result: 0.04
-
-Enter an expression (ex. 2 + 3):
->> 12 G 15
-Result: 3
-
-Enter an expression (ex. 2 + 3):
->> 12 L 15
-Result: 60
-
-Enter an expression (ex. 2 + 3):
->> 12 % 5
-Result: 2
-
-*/
